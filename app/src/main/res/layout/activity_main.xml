@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#673AB7"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="USER MANAGEMENT"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Tìm ở đây"
+        android:textColor="#4CAF50"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/insertRow"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="insertRowActivity"
+        android:text="INSERT USER"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/updateRowView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="updateRowView"
+        android:text="UPDATE USER"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/deleteRow"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="deleteRowActivity"
+        android:text="DELETE USER"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/rowCount"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="rowCount"
+        android:text="COUNT USER"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/truncateTable"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="truncateTable"
+        android:text="REMOVE ALL USER"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
