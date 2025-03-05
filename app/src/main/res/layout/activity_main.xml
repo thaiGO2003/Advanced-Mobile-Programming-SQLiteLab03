@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#673AB7"
+        android:background="@color/purple_blue"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
@@ -21,65 +22,39 @@
             android:text="USER MANAGEMENT"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
-
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Tìm ở đây"
-        android:textColor="#4CAF50"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/insertRow"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="insertRowActivity"
-        android:text="INSERT USER"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/updateRowView"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="updateRowView"
-        android:text="UPDATE USER"
-        android:textColor="@android:color/white" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
 
-    <Button
-        android:id="@+id/deleteRow"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:queryHint="Nhập tên user..."
+            app:iconifiedByDefault="false" />
+
+        <ImageButton
+            android:id="@+id/fab_add_user"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rounded_button"  android:src="@android:drawable/ic_input_add"
+            android:onClick="insertRowActivity"  android:contentDescription="Add User" /> </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewUsers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="deleteRowActivity"
-        android:text="DELETE USER"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/rowCount"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="rowCount"
-        android:text="COUNT USER"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/truncateTable"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="truncateTable"
-        android:text="REMOVE ALL USER"
-        android:textColor="@android:color/white" />
-
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"/>
 </LinearLayout>

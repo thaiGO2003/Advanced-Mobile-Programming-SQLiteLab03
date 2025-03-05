@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Insert New User"
+            android:text="Update A User"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </androidx.appcompat.widget.Toolbar>
@@ -101,12 +101,12 @@
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/insertRowFrom"
+                android:id="@+id/updateRowBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_button"
-                android:text="INSERT USER"
+                android:text="UPDATE USER"
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </ScrollView>

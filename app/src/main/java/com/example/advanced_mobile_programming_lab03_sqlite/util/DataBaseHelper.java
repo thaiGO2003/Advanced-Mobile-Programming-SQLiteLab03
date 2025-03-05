@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.example.advanced_mobile_programming_lab03_sqlite.adapter.UsersDatabaseAdapter;
 
-import static com.example.advanced_mobile_programming_lab03_sqlite.adapter.UsersDatabaseAdapter.TABLE_NAME;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 

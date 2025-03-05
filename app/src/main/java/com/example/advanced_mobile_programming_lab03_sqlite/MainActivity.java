@@ -1,60 +1,90 @@
 package com.example.advanced_mobile_programming_lab03_sqlite;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.advanced_mobile_programming_lab03_sqlite.adapter.UsersDatabaseAdapter;
+import com.example.advanced_mobile_programming_lab03_sqlite.model.UserModel;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    UsersDatabaseAdapter usersDatabaseAdapter;
+    private UsersDatabaseAdapter usersDatabaseAdapter;
+    private RecyclerView recyclerViewUsers;
+    private CustomListAdapterUsers adapterUsers;
+    private List<UserModel> userList;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // create the instance of Database using singleton
         usersDatabaseAdapter = UsersDatabaseAdapter.getInstance(getApplicationContext());
+        usersDatabaseAdapter.open();
+
+        recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
+        searchView = findViewById(R.id.searchView);
+
+        recyclerViewUsers.setLayoutManager(new LinearLayoutManager(this));
+
+        loadUsers();
+
+        // Xử lý tìm kiếm user theo tên
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterUsers(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterUsers(newText);
+                return false;
+            }
+        });
     }
 
-    //open activity to Insert new rows in table
+    private void loadUsers() {
+        try {
+            userList = usersDatabaseAdapter.getRows();
+            adapterUsers = new CustomListAdapterUsers(this, userList);
+            recyclerViewUsers.setAdapter(adapterUsers);
+        } catch (JSONException e) {
+            Toast.makeText(this, "Error loading users", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void filterUsers(String query) {
+        List<UserModel> filteredList = usersDatabaseAdapter.searchUsers(query);
+        adapterUsers.updateData(filteredList);
+    }
+
     public void insertRowActivity(View view) {
-        Intent myIntent = new Intent(MainActivity.this, InsertRowActivity.class);
-        MainActivity.this.startActivity(myIntent);
+        Intent insertRowIntent = new Intent(MainActivity.this, InsertRowActivity.class);
+        startActivity(insertRowIntent);
     }
 
-    //Open activity to update rows
-    public void updateRowView(View view) {
-        Intent myIntent = new Intent(MainActivity.this, UpdateRowsActivity.class);
-        MainActivity.this.startActivity(myIntent);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadUsers(); // Load lại danh sách user khi quay lại activity
     }
 
-    //call method to show rows count in Toast
-    public void rowCount(View view) {
-        usersDatabaseAdapter.getRowCount();
-    }
-
-
-    //Open activity to delete rows
-    public void deleteRowActivity(View view) {
-        Intent myIntent = new Intent(MainActivity.this, DeleteRowsActivity.class);
-        MainActivity.this.startActivity(myIntent);
-    }
-
-    //Button method to truncate table rows
-    public void truncateTable(View view) {
-        usersDatabaseAdapter.truncateTable();
-    }
-
-    //Open URL in browser
-    public void goToUrl(View view) {
-        String url = "https://timoday.edu.vn";
-        Uri uriUrl = Uri.parse(url);
-        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-        startActivity(launchBrowser);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        usersDatabaseAdapter.close();
     }
 }
